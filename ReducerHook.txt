@@ -1,0 +1,33 @@
+// reducer file
+
+const CounterReducer = (state, action) => {
+    switch (action) {
+      case 'INCREMENT':
+        return state + 1
+    }
+  }
+
+  export default CounterReducer;
+
+//componenet
+
+import React, { useReducer } from 'react';
+import CounterReducer from './CounterReducer';
+
+
+function ChildTwo() {
+
+    let [state, dispatch] = useReducer(CounterReducer,0)
+    
+  return (
+    <div>
+      <h1>Child Two</h1>
+      <h1>{state}</h1>
+      <button onClick={()=>{dispatch('INCREMENT')}}>
+          reducer
+      </button>
+    </div>
+  );
+}
+
+export default ChildTwo;
