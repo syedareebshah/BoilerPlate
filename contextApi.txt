@@ -1,0 +1,53 @@
+//ContextApi
+
+import React, { createContext } from 'react';
+
+const counterContext = createContext(5);
+
+export default counterContext;
+
+//App.js File
+// The components which are wraped in provider , can access context state.
+
+import style from './App.module.css'
+import React, { useState } from 'react';
+import Parent from './Parent';
+import CounterContext from './CounterContext'
+
+
+
+function App() {
+  let countState = useState(30)
+  return (
+    <CounterContext.Provider value={countState}>
+    <div>
+      <Parent />
+    </div>
+    </CounterContext.Provider>
+  );
+}
+
+export default App;
+
+//Child components accessing state
+
+import React, {  useContext } from 'react';
+import CounterContext from './CounterContext';
+
+
+function Child() {
+    let counterValue = useContext(CounterContext)
+    console.log(counterValue)
+  return (
+    <div>
+      <h1>Child</h1>
+      <button onClick={()=>{console.log(counterValue[1](++counterValue[0]))}}>
+          Button
+      </button>
+      <h1>{counterValue[0]}</h1>
+    </div>
+  );
+}
+
+export default Child;
+
